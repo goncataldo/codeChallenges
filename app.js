@@ -5,10 +5,18 @@ class Producto {
         this.name = name;
         this.price = price;
         this.weight = weight;
+        if (!this.id)
+            throw new ProductValidationError("Product id is missing");
+        if (!this.name)
+            throw new ProductValidationError("Product name is missing");
+        if (!this.price)
+            throw new ProductValidationError("Product price is missing");
+        if (!this.weight)
+            throw new ProductValidationError("Product weight is missing");
         this.productCreated();
     }
-    toString(product) {
-        return JSON.stringify(product);
+    toString() {
+        return JSON.stringify(this);
     }
     priceWithDelivery() {
         const weight = this.weight;
@@ -27,8 +35,14 @@ class Producto {
         console.log(`Product with id ${this.id} has been created.`);
     }
 }
-const notebook = new Producto("code#8281", "Lenovo Thinkpad", 100, 30);
-console.log(notebook.toString(notebook));
+class ProductValidationError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "Product Validation Error";
+    }
+}
+const notebook = new Producto("166", "Lenovo Thinkpad", 100, 30);
+console.log(notebook.toString());
 console.log(notebook.priceWithDelivery());
 notebook.notifyProductCreated();
 //# sourceMappingURL=app.js.map
