@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev": "cd src && tsc && cd .. && cd dist && node app.js"
+  },
   "dependencies": {
     "typescript": "^5.1.3"
   }
